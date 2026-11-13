@@ -786,14 +786,14 @@ export default function App() {
                 {/* ===================================================================
                     8. CLOSING BLESSING SECTION
                 =================================================================== */}
-                <section className="relative grid min-h-[72svh] place-items-center overflow-hidden bg-gradient-to-b from-[#1a0c2e] to-[#10061f] px-5 py-20 text-center text-white">
+                <section className="relative grid min-h-[72svh] place-items-center overflow-hidden bg-linear-to-b from-[#1a0c2e] to-[#10061f] px-5 py-20 text-center text-white">
                     {/* Ambient Glow */}
                     <div className="pointer-events-none absolute h-96 w-96 rounded-full bg-[#7e22ce]/20 blur-[120px]" />
 
                     {/* Inset Gold Border */}
                     <div className="pointer-events-none absolute inset-5 rounded-3xl border border-[#d9b46f]/25 sm:inset-7" />
 
-                    <Reveal className="relative z-10 max-w-[650px] px-4">
+                    <Reveal className="relative z-10 max-w-162.5 px-4">
                         <p
                             dir="rtl"
                             className="font-arabic text-[38px] text-[#edd89e] sm:text-[42px]"
@@ -826,7 +826,7 @@ export default function App() {
             {/* =====================================================================
                 9. FLOATING AUDIO CONTROLLER ("Zariya")
             ===================================================================== */}
-            <div className="fixed right-4 bottom-4 z-[80] flex items-center gap-2 rounded-full border border-[#d9b46f]/30 bg-[#1b0e2e]/85 py-1.5 pr-4 pl-1.5 text-white shadow-xl backdrop-blur-md sm:right-5 sm:bottom-5">
+            <div className="fixed right-4 bottom-4 z-80 flex items-center gap-2 rounded-full border border-[#d9b46f]/30 bg-[#1b0e2e]/85 py-1.5 pr-4 pl-1.5 text-white shadow-xl backdrop-blur-md sm:right-5 sm:bottom-5">
                 <button
                     type="button"
                     onClick={toggleMusic}
@@ -851,7 +851,7 @@ export default function App() {
             {lightboxImg && (
                 <div
                     onClick={() => setLightboxImg(null)}
-                    className="fixed inset-0 z-[110] flex items-center justify-center bg-[#120822]/92 p-4 backdrop-blur-md"
+                    className="fixed inset-0 z-110 flex items-center justify-center bg-[#120822]/92 p-4 backdrop-blur-md"
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
@@ -876,7 +876,7 @@ export default function App() {
             {/* =====================================================================
                 FOOTER & CREDITS
             ===================================================================== */}
-            <footer className="border-t border-[#d9b46f]/15 bg-[#0c0417] px-6 py-8 text-center text-white">
+            <footer className="border-t border-[#d9b46f]/15 bg-[#0c0417] px-6 py-6 text-center text-white">
                 <p className="text-[10px] tracking-[0.2em] text-purple-200/50 uppercase">
                     Crafted with love by{' '}
                     <a
