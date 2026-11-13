@@ -1,13 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 
-/**
- * ============================================================================
- * ASSET CONFIGURATION
- * Replace these URLs with your local paths (e.g., "/assets/hero.jpg")
- * when deploying with your own photography and audio files.
- * ============================================================================
- */
 const ASSETS = {
   heroDesktop:
     'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85',
@@ -15,24 +8,21 @@ const ASSETS = {
     'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85',
   memory:
     'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=85',
-  portrait:
-    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85',
+
   galleryExtra:
     'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=85',
   // Dynamic QR code pointing directly to Emerald Palace Google Maps link
   locationQr:
     'https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=071f1b&bgcolor=ffffff&data=' +
-    encodeURIComponent('https://maps.app.goo.gl/7dC7fb8JY9TztAum9'),
+    encodeURIComponent('https://maps.app.goo.gl/zw4HkZ47YxzwsEzU8'),
   // Replace with "/assets/wedding-music.mp3" for your custom track
-  musicSrc: './assets/tu-zariya.mp3',
+  musicSrc: '/assets/tu-zariya.mp3',
 };
 
-const MAPS_URL = 'https://maps.app.goo.gl/7dC7fb8JY9TztAum9';
+const MAPS_URL = 'https://maps.app.goo.gl/zw4HkZ47YxzwsEzU8';
 const WEDDING_DATE_ISO = '2026-12-27T11:00:00+05:30';
 
-/**
- * Reusable Scroll-Reveal Wrapper using IntersectionObserver
- */
+
 const Reveal = ({ children, className = '', delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -71,7 +61,6 @@ const Reveal = ({ children, className = '', delay = 0 }) => {
 };
 
 export default function App() {
-  // Envelope / Intro splash state (starts closed/visible so guests open it)
   const [isOpened, setIsOpened] = useState(false);
 
   // Audio playback state
@@ -207,8 +196,8 @@ export default function App() {
         await audioRef.current.play();
         setIsPlaying(true);
         return;
-      } catch {
-        // Fallback to ambient chime if MP3 fails
+      } catch (err) {
+        console.error("Audio playback failed:", err);
       }
     }
     startAmbientFallback();
@@ -267,7 +256,6 @@ export default function App() {
 
   const galleryImages = [
     { src: ASSETS.heroDesktop, alt: 'Jasim and Fathima — Moment 1' },
-    { src: ASSETS.portrait, alt: 'Jasim and Fathima — Moment 2' },
     { src: ASSETS.memory, alt: 'Jasim and Fathima — Moment 3' },
   ];
 
@@ -312,7 +300,7 @@ export default function App() {
       {/* Subtle Paper Grain Overlay */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[99] opacity-[0.03]"
+        className="pointer-events-none fixed inset-0 z-99 opacity-[0.03]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
         }}
@@ -322,7 +310,7 @@ export default function App() {
           1. INTERACTIVE ENVELOPE / INTRO SPLASH OVERLAY
       ===================================================================== */}
       <div
-        className={`fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-[#061a17] text-white transition-all duration-1000 ${
+        className={`fixed inset-0 z-100 grid place-items-center overflow-hidden bg-[#061a17] text-white transition-all duration-1000 ${
           isOpened
             ? 'pointer-events-none invisible opacity-0'
             : 'visible opacity-100'
@@ -330,7 +318,7 @@ export default function App() {
       >
         {/* Slow-zooming Hero Background */}
         <div
-          className="animate-slow-zoom absolute -inset-[4%] bg-cover bg-[center_12%] saturate-75"
+          className="animate-slow-zoom absolute inset-[-4%] bg-cover bg-position-[center_12%] saturate-75"
           style={{ backgroundImage: `url("${ASSETS.heroDesktop}")` }}
         />
         {/* Dark Emerald Gradient Shade */}
@@ -342,7 +330,7 @@ export default function App() {
           }}
         />
         {/* Concentric Gold Ring */}
-        <div className="pointer-events-none absolute h-[108vw] w-[108vw] max-h-[800px] max-w-[800px] rounded-full border border-[#d0ac67]/45 shadow-[0_0_0_30px_rgba(208,172,103,0.035)] sm:h-[74vw] sm:w-[74vw]" />
+        <div className="pointer-events-none absolute h-[108vw] w-[108vw] max-h-200 max-w-200 rounded-full border border-[#d0ac67]/45 shadow-[0_0_0_30px_rgba(208,172,103,0.035)] sm:h-[74vw] sm:w-[74vw]" />
 
         {/* Intro Content */}
         <div className="relative z-10 px-6 text-center">
@@ -386,10 +374,10 @@ export default function App() {
         {/* ===================================================================
             2. HERO SECTION
         =================================================================== */}
-        <section className="relative grid h-svh min-h-[660px] w-full place-items-center overflow-hidden text-center text-white">
+        <section className="relative grid h-svh min-h-165 w-full place-items-center overflow-hidden text-center text-white">
           {/* Desktop Background */}
           <div
-            className="animate-slow-zoom absolute inset-0 hidden bg-cover bg-[center_12%] sm:block"
+            className="animate-slow-zoom absolute inset-0 hidden bg-cover bg-position-[center_12%] sm:block"
             style={{ backgroundImage: `url("${ASSETS.heroDesktop}")` }}
           />
           {/* Mobile Background */}
@@ -407,7 +395,7 @@ export default function App() {
           />
 
           {/* Hero Inner Frame */}
-          <div className="relative z-10 flex h-full w-full max-w-[980px] flex-col items-center justify-between px-5 pt-[7vh] pb-[13vh]">
+          <div className="relative z-10 flex h-full w-full max-w-245 flex-col items-center justify-between px-5 pt-[7vh] pb-[13vh]">
             {/* Top Bismillah & Subtitle */}
             <div className="flex flex-col items-center gap-2">
               <p className="font-arabic m-0 text-[21px] text-[#e8cf91] sm:text-[26px]">
@@ -419,7 +407,7 @@ export default function App() {
             </div>
 
             {/* Center Couple Title & Date */}
-            <div className="-mt-[1vh] flex flex-col items-center justify-center">
+            <div className="mt-[-1vh] flex flex-col items-center justify-center">
               <h2 className="font-serif-editorial m-0 text-[clamp(52px,14vw,98px)] leading-[0.84] font-normal italic sm:whitespace-nowrap">
                 Jasim{' '}
                 <span className="not-italic text-[0.58em] text-[#d0ac67]">
@@ -435,13 +423,13 @@ export default function App() {
               </p>
 
               {/* Gold Diamond Ornament Divider */}
-              <div className="my-2.5 flex h-8 w-[150px] items-center justify-center gap-2.5 text-[#d0ac67] sm:w-[175px]">
-                <span className="h-px w-[52px] bg-[#d0ac67]/65 sm:w-[65px]" />
+              <div className="my-2.5 flex h-8 w-37.5 items-center justify-center gap-2.5 text-[#d0ac67] sm:w-[175px]">
+                <span className="h-px w-13 bg-[#d0ac67]/65 sm:w-16.25" />
                 <span className="text-xs">✦</span>
-                <span className="h-px w-[52px] bg-[#d0ac67]/65 sm:w-[65px]" />
+                <span className="h-px w-13 bg-[#d0ac67]/65 sm:w-16.25" />
               </div>
 
-              <p className="font-serif-editorial m-0 text-[21px] leading-[1.25] text-white italic drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] sm:text-[24px]">
+              <p className="font-serif-editorial m-0 text-[21px] leading-tight text-white italic drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] sm:text-[24px]">
                 invite you to share in the joy
                 <br />
                 of their wedding celebration
@@ -455,7 +443,7 @@ export default function App() {
               className="animate-float-cue absolute bottom-7 left-1/2 z-20 flex flex-col items-center gap-1.5 text-center text-white no-underline"
             >
               <span
-                className="mb-0.5 h-px w-[110px] sm:w-[130px]"
+                className="mb-0.5 h-px w-27.5 sm:w-32.5"
                 style={{
                   background:
                     'linear-gradient(90deg, transparent, rgba(208,172,103,0.75), transparent)',
@@ -475,7 +463,7 @@ export default function App() {
             3. THE INVITATION & FAMILY LINEAGE SECTION
         =================================================================== */}
         <section id="invitation" className="px-[7vw] py-24 sm:py-28">
-          <Reveal className="mx-auto max-w-[1050px]">
+          <Reveal className="mx-auto max-w-262.5">
             <p className="text-[9px] font-semibold tracking-[0.28em] text-[#98763d] uppercase">
               THE INVITATION
             </p>
@@ -484,7 +472,7 @@ export default function App() {
               <br />
               <em className="font-normal text-[#98763d]">we invite you.</em>
             </h2>
-            <p className="max-w-[570px] text-[15px] leading-[1.75] text-[#718079]">
+            <p className="max-w-142.5 text-[15px] leading-[1.75] text-[#718079]">
               With the blessings of their families, we, their{' '}
               <strong className="font-semibold text-[#20332e]">
                 kith and kin
@@ -495,7 +483,7 @@ export default function App() {
             </p>
 
             {/* 3-Column Bordered Couple & Family Grid */}
-            <div className="my-9 grid max-w-[820px] grid-cols-1 items-center gap-6 border-y border-[#d6c8ad] py-7 text-center sm:grid-cols-[1fr_54px_1fr] sm:gap-2">
+            <div className="my-9 grid max-w-205 grid-cols-1 items-center gap-6 border-y border-[#d6c8ad] py-7 text-center sm:grid-cols-[1fr_54px_1fr] sm:gap-2">
               <div className="px-2">
                 <strong className="font-serif-editorial block text-[26px] leading-tight font-medium tracking-[0.04em] text-[#20332e] sm:text-[28px]">
                   JASIM KARIMBUMKANDATHIL
@@ -528,7 +516,7 @@ export default function App() {
               </div>
             </div>
 
-            <p className="max-w-[570px] text-[15px] leading-[1.75] text-[#718079]">
+            <p className="max-w-142.5 text-[15px] leading-[1.75] text-[#718079]">
               We request the pleasure of your gracious presence and blessings as
               they begin this beautiful journey together.
             </p>
@@ -593,7 +581,7 @@ export default function App() {
                   <em className="font-normal text-[#98763d]">Celebration</em>
                 </h2>
                 <p className="text-[11px] font-semibold tracking-[0.16em] text-[#98763d] uppercase">
-                  11:00 AM — 3:00 PM
+                  11:00 AM - 3:00 PM
                 </p>
                 <p className="mt-3 text-[15px] leading-[1.7] text-[#718079]">
                   <strong className="font-semibold text-[#20332e]">
