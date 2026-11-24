@@ -27,10 +27,10 @@ const FONT = {
 
 const WEDDING = {
     shortNames: ['Jk', 'Rinzi'] as const,
-    groom: 'Muhamad Jasim Kk',
+    groom: 'Muhamad Jasim K K',
     bride: 'Fathima Rinzi V V',
     families: [
-        { parents: ['Mr. Mujeeb Rahman KK', 'Mrs. Raheena KP'], address: 'Karimbumkandathil House, Mayyerichira' },
+        { parents: ['Mr. Mujeeb Rahman K K', 'Mrs. Raheena KP'], address: 'Karimbumkandathil House, Mayyerichira' },
         { parents: ['Mr. Assainar V V', 'Mrs. Sulaikha MP'], address: 'ValiyaValappil House, Cheravannur' },
     ],
     // 27 Dec 2026, 11:00 IST
